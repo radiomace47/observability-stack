@@ -1,0 +1,28 @@
+logging {
+	level = "info"
+	format = "logfmt"
+}
+
+loki.source.journal "journal" {
+	forward_to = [loki.write.local.receiver]
+	labels = {component = "loki.source.journal", job = "systemd-journal"}
+	path = "/var/log/journal"
+}
+
+local.file_match "app_logs" {
+	path_targets = [
+		{__path__ = env("HOME") + "/Programs/jellyfin-config/log/*.log", job = "jellyfin"},
+        ]
+	sync_period = "5s"
+}
+
+loki.source.file "apps" {
+	forward_to = [loki.write.local.receiver]
+	targets = local.file_match.app_logs.targets
+}
+
+loki.write "local" {
+	endpoint {
+		url = "http://loki:3100/loki/api/v1/push"
+	}
+}

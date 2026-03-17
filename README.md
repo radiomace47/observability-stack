@@ -15,4 +15,5 @@ Ignore my Jellyfin and Flaresolverr stuff in my docker-compose file. I don't kno
 Copy `.env.example` to `.env` in the same folder where your `docker-compose.yml` lives and update the paths for your system before running `docker compose up`. 
 All my stuff currently just lives in a folder called `docker` and eventually will be split up so that my observability stuff has a home separate from my media server stuff. Tweak filepaths to your liking. 
 Note that my `config.alloy` has a hardcoded Jellyfin log path that might not fit what you want. Just skim over filepaths. 
+Note that I don't have Prometheus configured and I only have a little bit being tracked by Loki. Again, this isn't finished. 
 Also, this is all done on Linux. If you're running something else, expect a bit of leg work, I'm not sure how it would work there. 

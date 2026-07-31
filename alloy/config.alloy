@@ -40,7 +40,7 @@ loki.source.journal "journal" {
 
 local.file_match "app_logs" {
 	path_targets = [
-		{__path__ = env("HOME") + "/Programs/jellyfin-config/log/*.log", job = "jellyfin"},
+		{__path__ = env("PROGRAMS_DIR") + "/jellyfin-config/log/*.log", job = "jellyfin"},
         ]
 	sync_period = "5s"
 }
